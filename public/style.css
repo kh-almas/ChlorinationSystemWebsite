@@ -27,7 +27,7 @@
 }
 @media (min-width: 992px) {
     .pump-show-search-form {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
@@ -74,5 +74,41 @@
 @media (min-width: 768px) {
     .add-test-history-two {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+
+.profile_update_form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: center;
+}
+@media (min-width: 768px) {
+    .profile_update_form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 992px) {
+    .profile_update_form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.profile_update_form_one {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: center;
+}
+@media (min-width: 768px) {
+    .profile_update_form_one {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 992px) {
+    .profile_update_form_one {
+        grid-template-columns: repeat(5, 1fr);
     }
 }

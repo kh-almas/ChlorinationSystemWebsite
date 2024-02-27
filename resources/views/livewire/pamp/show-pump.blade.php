@@ -1,29 +1,26 @@
 <div>
     <div class="pump-show-search-form">
-        <div class="p-4">
-            <div class="flex justify-between items-center">
-                <div>
-                    <x-input-label for="name" :value="__('Pump Name')" />
-                    <x-text-input wire:model="searchName" id="searchName" name="searchName" type="text" class="mt-1 block w-full"   autofocus autocomplete="searchName" />
-                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                </div>
-            </div>
+        <div>
+            <x-input-label for="name" :value="__('Pump Name')" />
+            <x-text-input wire:model.debounce.100ms="searchName" wire:keydown="applyFilter" id="searchName" name="searchName" type="text" class="mt-1 block w-full" autofocus autocomplete="searchName" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
             <label for="zone" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Zone</label>
             <div class="mt-1">
-                <select id="zone" name="zone" autocomplete="zone" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option>Zone-1</option>
-                    <option>Zone-2</option>
-                    <option>Zone-3</option>
-                    <option>Zone-4</option>
-                    <option>Zone-5</option>
-                    <option>Zone-6</option>
-                    <option>Zone-7</option>
-                    <option>Zone-8</option>
-                    <option>Zone-9</option>
-                    <option>Zone-10</option>
+                <select wire:model="zone" wire:change="applyFilter" id="zone" name="zone" autocomplete="zone" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <option >Select a zone</option>
+                    <option value="Zone-1">Zone-1</option>
+                    <option value="Zone-2">Zone-2</option>
+                    <option value="Zone-3">Zone-3</option>
+                    <option value="Zone-4">Zone-4</option>
+                    <option value="Zone-5">Zone-5</option>
+                    <option value="Zone-6">Zone-6</option>
+                    <option value="Zone-7">Zone-7</option>
+                    <option value="Zone-8">Zone-8</option>
+                    <option value="Zone-9">Zone-9</option>
+                    <option value="Zone-10">Zone-10</option>
                 </select>
             </div>
         </div>
@@ -31,9 +28,10 @@
         <div>
             <label for="installation-year" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Year of Installation</label>
             <div class="mt-1">
-                <select id="installation-year" name="installation-year" autocomplete="installation-year" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                <select wire:model="installation_year" wire:change="applyFilter" id="installation-year" name="installation-year" autocomplete="installation-year" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <option >Select a year</option>
                     @for($year = 2024; $year >= 1970; $year--)
-                        <option>{{ $year }}</option>
+                        <option value="{{ $year }}">{{ $year }}</option>
                     @endfor
                 </select>
             </div>
@@ -42,16 +40,11 @@
         <div>
             <label for="pumpcondition" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Pump Running Condition</label>
             <div class="mt-1">
-                <select id="pumpcondition" name="pumpcondition" autocomplete="pumpcondition" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option>Running</option>
-                    <option>Not running</option>
+                <select wire:model="pumpCondition" wire:change="applyFilter" id="pumpcondition" name="pumpcondition" autocomplete="pumpcondition" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <option >Select pump condition</option>
+                    <option value="Running">Running</option>
+                    <option value="Not running">Not running</option>
                 </select>
-            </div>
-        </div>
-
-        <div class="">
-            <div class="flex justify-center">
-                <x-primary-button>{{ __('Search') }}</x-primary-button>
             </div>
         </div>
     </div>
@@ -61,10 +54,10 @@
             <div class="p-4">
                 <div class="flex justify-between items-center">
                     <h2 class="mb-3 text-2xl font-semibold leadi">All pump</h2>
-                    <div>
-                        <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full"   autofocus autocomplete="name" />
-                        <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                    </div>
+{{--                    <div>--}}
+{{--                        <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full"   autofocus autocomplete="name" />--}}
+{{--                        <x-input-error class="mt-2" :messages="$errors->get('name')" />--}}
+{{--                    </div>--}}
                 </div>
             </div>
 

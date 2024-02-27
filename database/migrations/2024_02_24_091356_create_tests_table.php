@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pump_id');
             $table->string('running_status');
-            $table->string('water_production');
-            $table->string('free_residual_chlorine');
-            $table->string('total_residual_chlorine');
-            $table->string('combined_residual_chlorine');
+            $table->string('water_production')->nullable();
+            $table->string('free_residual_chlorine')->nullable();
+            $table->string('total_residual_chlorine')->nullable();
+            $table->string('combined_residual_chlorine')->nullable();
             $table->string('test_time');
             $table->string('test_date');
             $table->string('name');

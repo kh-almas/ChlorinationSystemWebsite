@@ -1,29 +1,29 @@
 <div>
     <div class="pump-show-search-form">
-        <div class="p-4">
-            <div class="flex justify-between items-center">
-                <div>
-                    <x-input-label for="name" :value="__('Pump Name')" />
-                    <x-text-input wire:model="searchName" id="searchName" name="searchName" type="text" class="mt-1 block w-full"   autofocus autocomplete="searchName" />
-                    <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                </div>
+        <div>
+            <div>
+                <x-input-label for="name" :value="__('Pump Name')" />
+                <x-text-input wire:model.debounce.100ms="searchName" wire:keydown="applyFilter" id="searchName" name="searchName" type="text" class="mt-1 block w-full"   autofocus autocomplete="searchName" />
+                <x-input-error class="mt-2" :messages="$errors->get('name')" />
             </div>
         </div>
 
         <div>
-            <label for="zone" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Zone</label>
+            <label for="month" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Month</label>
             <div class="mt-1">
-                <select id="zone" name="zone" autocomplete="zone" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option>Zone-1</option>
-                    <option>Zone-2</option>
-                    <option>Zone-3</option>
-                    <option>Zone-4</option>
-                    <option>Zone-5</option>
-                    <option>Zone-6</option>
-                    <option>Zone-7</option>
-                    <option>Zone-8</option>
-                    <option>Zone-9</option>
-                    <option>Zone-10</option>
+                <select wire:model="selectedMonth" wire:change="applyFilter" id="month" name="month" autocomplete="zone" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
                 </select>
             </div>
         </div>
@@ -42,16 +42,10 @@
         <div>
             <label for="pumpcondition" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Pump Running Condition</label>
             <div class="mt-1">
-                <select id="pumpcondition" name="pumpcondition" autocomplete="pumpcondition" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                <select wire:model="pumpCondition" wire:change="applyFilter" id="pumpcondition" name="pumpcondition" autocomplete="pumpcondition" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                     <option>Running</option>
                     <option>Not running</option>
                 </select>
-            </div>
-        </div>
-
-        <div class="">
-            <div class="flex justify-center">
-                <x-primary-button>{{ __('Search') }}</x-primary-button>
             </div>
         </div>
     </div>
@@ -60,11 +54,11 @@
         <div class=" mx-auto rounded-md sm:p-4 dark:text-gray-100 dark:bg-gray-900">
             <div class="p-4">
                 <div class="flex justify-between items-center">
-                    <h2 class="mb-3 text-2xl font-semibold leadi">All pump</h2>
-                    <div>
-                        <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full"   autofocus autocomplete="name" />
-                        <x-input-error class="mt-2" :messages="$errors->get('name')" />
-                    </div>
+                    <h2 class="mb-3 text-2xl font-semibold leading">All tests</h2>
+{{--                    <div>--}}
+{{--                        <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full"   autofocus autocomplete="name" />--}}
+{{--                        <x-input-error class="mt-2" :messages="$errors->get('name')" />--}}
+{{--                    </div>--}}
                 </div>
             </div>
 
