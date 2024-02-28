@@ -5,6 +5,7 @@ namespace App\Livewire\Pamp;
 use App\Models\Test;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ShowTest extends Component
 {
@@ -30,6 +31,13 @@ class ShowTest extends Component
     public function applyFilter()
     {
         $this->resetPage();
+    }
+
+    public function testReport($id)
+    {
+//        $pdf = Pdf::loadView('report.testReport');
+//        return $pdf->download('test-report.pdf', ['Content-Disposition' => 'attachment; filename=test-report.pdf']);
+        dd($id);
     }
 
     public function render()

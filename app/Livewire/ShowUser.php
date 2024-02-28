@@ -10,6 +10,13 @@ class ShowUser extends Component
 {
     use WithPagination;
 
+    public function deleteUser($id)
+    {
+        User::find($id)->delete();
+
+        $this->dispatch('user_deleted');
+    }
+
     public function render()
     {
         $users = User::paginate(10);

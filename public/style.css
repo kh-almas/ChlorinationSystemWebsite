@@ -112,3 +112,15 @@
         grid-template-columns: repeat(5, 1fr);
     }
 }
+
+.settings_page {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    align-items: center;
+}
+@media (min-width: 992px) {
+    .settings_page {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
