@@ -33,15 +33,15 @@ class Create extends Component
 
 
     public function updateProfileInformation() {
-        logger('name: '.$this->name);
-        logger('source_identification: '. $this->source_identification);
-        logger('location: '.  $this->location);
-        logger('dma: '. $this->dma);
-        logger('zone: '. $this->zone);
-        logger('installation_year: '. $this->installation_year);
-        logger('depth: '. $this->depth);
-        logger('chlorination: '. $this->chlorination);
-        logger('pumpCondition: '. $this->pumpcondition);
+//        logger('name: '.$this->name);
+//        logger('source_identification: '. $this->source_identification);
+//        logger('location: '.  $this->location);
+//        logger('dma: '. $this->dma);
+//        logger('zone: '. $this->zone);
+//        logger('installation_year: '. $this->installation_year);
+//        logger('depth: '. $this->depth);
+//        logger('chlorination: '. $this->chlorination);
+//        logger('pumpCondition: '. $this->pumpcondition);
 
         $this->validate();
 
@@ -120,7 +120,7 @@ class Create extends Component
                             <label for="installation-year" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Year of Installation</label>
                             <div class="mt-1">
                                 <select wire:model="installation_year" id="installation-year" name="installation-year" autocomplete="installation-year" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                    @for($year = 2024; $year >= 1970; $year--)
+                                    @for($year = date("Y"); $year >= 1970; $year--)
                                         <option value="{{ $year }}">{{ $year }}</option>
                                     @endfor
                                 </select>

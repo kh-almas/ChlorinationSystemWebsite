@@ -37,9 +37,9 @@ new class extends Component
                     <x-nav-link :href="route('pump')" :active="request()->routeIs('pump')" wire:navigate>
                         {{ __('Pump profile') }}
                     </x-nav-link>
-{{--                    <x-nav-link :href="route('test')" :active="request()->routeIs('test')" wire:navigate>--}}
-{{--                        {{ __('Test history') }}--}}
-{{--                    </x-nav-link>--}}
+                    <x-nav-link :href="route('allTest')" :active="request()->routeIs('allTest')" wire:navigate>
+                        {{ __('Test history') }}
+                    </x-nav-link>
                     <div class="inline-flex items-center">
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">

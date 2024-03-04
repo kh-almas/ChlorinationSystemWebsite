@@ -45,7 +45,8 @@ class AddTestHistory extends Component
     public function submitForm()
     {
 //        $this->validate();
-//        dd($this->phone);
+//        dd($this->testMonth);
+
 
         Test::updateOrCreate(
             ['name' => $this->name], // Assuming you have an 'id' property for update, adjust accordingly
@@ -79,22 +80,22 @@ class AddTestHistory extends Component
                     <div class="add-test-history-one">
                         <div class="mt-3">
                             <x-input-label for="water_production" :value="__('Water Production / minute')" />
-                            <x-text-input wire:model="water_production" id="water_production" name="water_production" type="number" class="mt-1 block w-full" :disabled="$checkbox" autofocus autocomplete="water_production"/>
+                            <x-text-input wire:model="water_production" id="water_production" name="water_production" type="number" class="mt-1 block w-full" style="{{ $checkbox ? 'border: 1px solid red' : '' }}" :disabled="$checkbox ? true : false" />
                             <x-input-error class="mt-2" :messages="$errors->get('water_production')" />
                         </div>
                         <div class="mt-3">
                             <x-input-label for="free_residual_chlorine"  :value="__('Free Residual Chlorine (mg/l)')" />
-                            <x-text-input wire:model="free_residual_chlorine" wire:change="calculateCombinedResidualChlorine" :disabled="$checkbox" id="free_residual_chlorine" name="free_residual_chlorine" type="number" class="mt-1 block w-full" autofocus autocomplete="free_residual_chlorine" />
+                            <x-text-input wire:model="free_residual_chlorine" wire:change="calculateCombinedResidualChlorine" style="{{ $checkbox ? 'border: 1px solid red' : '' }}" :disabled="$checkbox ? true : false" id="free_residual_chlorine" name="free_residual_chlorine" type="number" class="mt-1 block w-full"/>
                             <x-input-error class="mt-2" :messages="$errors->get('free_residual_chlorine')" />
                         </div>
                         <div class="mt-3">
                             <x-input-label for="total_residual_chlorine" :value="__('Total Residual Chlorine (mg/l)')" />
-                            <x-text-input wire:model="total_residual_chlorine" wire:change="calculateCombinedResidualChlorine" :disabled="$checkbox" id="total_residual_chlorine" name="total_residual_chlorine" type="number" class="mt-1 block w-full" autofocus autocomplete="total_residual_chlorine" />
+                            <x-text-input wire:model="total_residual_chlorine" wire:change="calculateCombinedResidualChlorine" style="{{ $checkbox ? 'border: 1px solid red' : '' }}" :disabled="$checkbox ? true : false" id="total_residual_chlorine" name="total_residual_chlorine" type="number" class="mt-1 block w-full"/>
                             <x-input-error class="mt-2" :messages="$errors->get('total_residual_chlorine')" />
                         </div>
                         <div class="mt-3">
                             <x-input-label for="combined_residual_chlorine (mg/l)" :value="__('Combined Residual Chlorine (mg/l)')" />
-                            <x-text-input wire:model="combined_residual_chlorine" :disabled="$checkbox" id="combined_residual_chlorine" name="combined_residual_chlorine" type="number" class="mt-1 block w-full" autofocus autocomplete="combined_residual_chlorine" />
+                            <x-text-input wire:model="combined_residual_chlorine" :disabled="$checkbox ? true : false" style="{{ $checkbox ? 'border: 1px solid red' : '' }}" id="combined_residual_chlorine" name="combined_residual_chlorine" type="number" class="mt-1 block w-full"/>
                             <x-input-error class="mt-2" :messages="$errors->get('combined_residual_chlorine')" />
                         </div>
                     </div>
@@ -102,12 +103,12 @@ class AddTestHistory extends Component
                     <div class="add-test-history-two">
                         <div class="mt-3">
                             <x-input-label for="test_time" :value="__('Test Time*')" />
-                            <x-text-input wire:model="test_time" id="test_time" name="test_time" type="time" class="mt-1 block w-full" autofocus autocomplete="test_time" />
+                            <x-text-input wire:model="test_time" id="test_time" name="test_time" type="time" class="mt-1 block w-full" />
                             <x-input-error class="mt-2" :messages="$errors->get('test_time')" />
                         </div>
                         <div class="mt-3">
                             <x-input-label for="test_date" :value="__('Test Date*')" />
-                            <x-text-input wire:model="test_date" id="test_date" name="test_date" type="date" class="mt-1 block w-full" autofocus autocomplete="test_date" />
+                            <x-text-input wire:model="test_date" id="test_date" name="test_date" type="date" class="mt-1 block w-full" />
                             <x-input-error class="mt-2" :messages="$errors->get('test_date')" />
                         </div>
                     </div>
@@ -115,12 +116,12 @@ class AddTestHistory extends Component
                     <div class="add-test-history-two">
                         <div class="mt-3">
                             <x-input-label for="name" :value="__('Name*')" />
-                            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" autofocus autocomplete="name" />
+                            <x-text-input wire:model="name" id="name" name="name" type="text" class="mt-1 block w-full" />
                             <x-input-error class="mt-2" :messages="$errors->get('name')" />
                         </div>
                         <div class="mt-3">
                             <x-input-label for="phone" :value="__('Phone*')" />
-                            <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" autofocus autocomplete="phone" />
+                            <x-text-input wire:model="phone" id="phone" name="phone" type="text" class="mt-1 block w-full" />
                             <x-input-error class="mt-2" :messages="$errors->get('phone')" />
                         </div>
                     </div>

@@ -45,6 +45,10 @@ Route::view('/test', 'test')
     ->middleware(['auth', 'verified'])
     ->name('test');
 
+Route::view('/test/all', 'allTest')
+    ->middleware(['auth', 'verified'])
+    ->name('allTest');
+
 Route::view('/test/update', 'updateTest')
     ->middleware(['auth', 'verified'])
     ->name('testUpdate');

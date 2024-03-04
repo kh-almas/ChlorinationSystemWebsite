@@ -2,7 +2,7 @@
     <div class="pump-show-search-form">
         <div>
             <x-input-label for="name" :value="__('Pump Name')" />
-            <x-text-input wire:model.debounce.100ms="searchName" wire:keydown="applyFilter" id="searchName" name="searchName" type="text" class="mt-1 block w-full" autofocus autocomplete="searchName" />
+            <x-text-input wire:model.debounce.100ms="searchName" wire:keydown="applyFilter" id="searchName" name="searchName" type="text" class="mt-1 block w-full"/>
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
@@ -10,7 +10,7 @@
             <label for="zone" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Zone</label>
             <div class="mt-1">
                 <select wire:model="zone" wire:change="applyFilter" id="zone" name="zone" autocomplete="zone" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option >Select a zone</option>
+                    <option value="">Select a zone</option>
                     <option value="Zone-1">Zone-1</option>
                     <option value="Zone-2">Zone-2</option>
                     <option value="Zone-3">Zone-3</option>
@@ -29,8 +29,8 @@
             <label for="installation-year" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Year of Installation</label>
             <div class="mt-1">
                 <select wire:model="installation_year" wire:change="applyFilter" id="installation-year" name="installation-year" autocomplete="installation-year" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option >Select a year</option>
-                    @for($year = 2024; $year >= 1970; $year--)
+                    <option value="">Select a year</option>
+                    @for($year = date("Y"); $year >= 1970; $year--)
                         <option value="{{ $year }}">{{ $year }}</option>
                     @endfor
                 </select>
@@ -41,7 +41,7 @@
             <label for="pumpcondition" class="block font-medium text-sm text-gray-700 dark:text-gray-300">Pump Running Condition</label>
             <div class="mt-1">
                 <select wire:model="pumpCondition" wire:change="applyFilter" id="pumpcondition" name="pumpcondition" autocomplete="pumpcondition" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option >Select pump condition</option>
+                    <option value="">Select pump condition</option>
                     <option value="Running">Running</option>
                     <option value="Not running">Not running</option>
                 </select>
@@ -65,27 +65,43 @@
                 {{ __('deleted.') }}
             </x-action-message>
 
-            <div class="overflow-x-auto mb-4">
-                <table class="min-w-full text-xs w-full">
-                    <thead class="rounded-t-lg dark:bg-gray-700">
-                    <tr class="text-left">
-                        <th title="Ranking" class="p-3 text-left">#</th>
-                        <th title="Team name" class="p-3 text-left">Name</th>
-                        <th title="Wins" class="p-3">Source Identification</th>
-                        <th title="Losses" class="p-3">Pump Location</th>
-                        <th title="Win percentage" class="p-3">DMA</th>
-                        <th title="Games behind" class="p-3">Zone</th>
-                        <th title="Home games" class="p-3">Installation Year</th>
-                        <th title="Away games" class="p-3">Depth</th>
-                        <th title="Last 10 games" class="p-3">Chlorination Unit Status</th>
-                        <th title="Current streak" class="p-3">Pump Running Status</th>
-                        <th title="Current streak" class="p-3">Action</th>
-                    </tr>
+            <div class="mb-4">
+                <table class="text-xs">
+                    <thead class="rounded-t-lg dark:bg-gray-700" style="height: 50px">
+                        <tr style="height: 48px">
+                            <th class="p-3 text-left"  style="white-space: nowrap">#</th>
+                            <th class="p-3 text-left"  style="white-space: nowrap">Name</th>
+                            <th class="p-3" style="white-space: nowrap">Source Identification</th>
+                            <th class="p-3"  style="white-space: nowrap">Pump Location</th>
+                            <th class="p-3"  style="white-space: nowrap">DMA</th>
+                            <th class="p-3" style="white-space: nowrap; cursor: pointer;" wire:click="zoneOrderFN">
+                                <div style="display: flex;align-items: center ">
+                                    Zone
+                                    <p style="display: flex; flex-direction: column; padding-left: 6px">
+                                        {!! $zoneOrder !== 'asc' ? '<i class="fa-solid fa-angle-up" style="font-size: 8px;"></i>' : '' !!}
+                                        {!! $zoneOrder !== 'desc' ? '<i class="fa-solid fa-angle-down" style="font-size: 8px;"></i>' : '' !!}
+                                    </p>
+                                </div>
+                            </th>
+                            <th class="p-3" style="white-space: nowrap; cursor: pointer;" wire:click="installationYearOrderFN">
+                                <div style="display: flex;align-items: center ">
+                                    Installation Year
+                                    <p style="display: flex; flex-direction: column; padding-left: 6px">
+                                        {!! $installationYearOrder !== 'asc' ? '<i class="fa-solid fa-angle-up" style="font-size: 8px;"></i>' : '' !!}
+                                        {!! $installationYearOrder !== 'desc' ? '<i class="fa-solid fa-angle-down" style="font-size: 8px;"></i>' : '' !!}
+                                    </p>
+                                </div>
+                            </th>
+                            <th class="p-3"  style="white-space: nowrap">Depth</th>
+                            <th class="p-3"  style="white-space: nowrap">Chlorination Unit Status</th>
+                            <th class="p-3"  style="white-space: nowrap">Pump Running Status</th>
+                            <th class="p-3"  style="white-space: nowrap">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach($pumps as $pump)
-                        <tr class="text-left border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-800">
-                            <td class="px-3 py-2 text-left">
+                        <tr class="border-b border-opacity-20 dark:border-gray-700 dark:bg-gray-800">
+                            <td class="px-3 py-2">
                                 <span>{{ $loop->index + 1 }}</span>
                             </td>
                             <td class="px-3 py-2 text-left">
@@ -115,9 +131,9 @@
                             <td class="px-3 py-2">
                                 <span>{{$pump->pump_running_condition}}</span>
                             </td>
-                            <td class="px-3 py-2" style="max-width: 50px !important;">
+                            <td class="px-3 py-2" style="max-width: 80px !important;">
                                 <div>
-                                    <x-dropdown align="right" class="w-20">
+                                    <x-dropdown align="right" class="w-20" style="z-index: 300; overflow: visible;">
                                         <x-slot name="trigger">
                                             <button class="inline-flex items-center px-2 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                                 Action
@@ -160,3 +176,4 @@
         </div>
     </div>
 </div>
+

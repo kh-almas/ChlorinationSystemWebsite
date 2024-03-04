@@ -18,13 +18,15 @@ class TestFactory extends Factory
     {
         return [
             'pump_id' => 1,
-            'running_status' => $this->faker->word,
+            'running_status' => $this->faker->randomElement(['Running', 'Not Running']),
             'water_production' => $this->faker->word,
             'free_residual_chlorine' => $this->faker->word,
             'total_residual_chlorine' => $this->faker->word,
             'combined_residual_chlorine' => $this->faker->word,
             'test_time' => $this->faker->time,
             'test_date' => $this->faker->date,
+            'test_month' => $this->faker->date,
+            'test_year' => $this->faker->date,
             'name' => $this->faker->name,
             'phone' => $this->faker->phoneNumber,
         ];
