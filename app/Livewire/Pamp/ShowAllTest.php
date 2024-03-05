@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Pamp;
 
-use App\Models\Pump;
+use App\Exports\TestExportBySearch;
+use App\Livewire\PumpExportAndImport;
 use App\Models\Test;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ShowAllTest extends Component
 {
@@ -20,24 +22,31 @@ class ShowAllTest extends Component
 
     public $testDateOrder;
 
-    public function updatedSelectedPumpName($value)
-    {
-        if(!empty($this->selectedPumpName)){
-            $this->allZone = DB::table('pumps')
-                ->where('id', $this->selectedPumpName)
-                ->get();
-        }else{
-            $this->allZone = DB::table('pumps')
-                ->select('zone')
-                ->whereIn('id', function ($query) {
-                    $query->select('pump_id')
-                        ->from('tests');
-                })
-                ->orderBy('zone')
-                ->distinct()
-                ->get();
-        }
-    }
+//    public function updatedSelectedPumpName($value)
+//    {
+////        dd($this->allZone);
+//        if(!empty($this->selectedPumpName)){
+//             $findZone = DB::table('pumps')
+//                 ->select('zone')
+//                ->where('id', $value)
+//                ->get();
+////             dd($findZone);
+////            $this->allZone = $findZone;
+//            $this->selectedZone = $findZone[0]->zone;
+//        }else{
+//            $this->allZone = DB::table('pumps')
+//                ->select('zone')
+//                ->whereIn('id', function ($query) {
+//                    $query->select('pump_id')
+//                        ->from('tests');
+//                })
+//                ->orderBy('zone')
+//                ->distinct()
+//                ->get();
+//            $this->selectedZone = '';
+//        }
+//        $this->resetPage();
+//    }
 
 
     public function updatedSelectedZone($value)
@@ -56,6 +65,7 @@ class ShowAllTest extends Component
                 })
                 ->get();
         }
+        $this->resetPage();
     }
     protected $listeners = ['test_deleted' => 'render'];
 
@@ -95,9 +105,36 @@ class ShowAllTest extends Component
         $this->resetPage();
     }
 
-    public function testReport($id)
+    public function testReport()
     {
-        dd($id);
+        $makeDataArray = [
+            'selectedPumpName' => $this->selectedPumpName,
+            'selectedMonth' => $this->selectedMonth,
+            'selectedZone' => $this->selectedZone,
+        ];
+        $makeDataJson = json_encode($makeDataArray);
+        $_SESSION['PumpInfoForQuery'] = $makeDataJson;
+
+        // Execute JavaScript to set the object in localStorage
+//        $this->dispatchBrowserEvent('storeDataInLocalStorage', ['makeDataJson' => $makeDataJson]);
+//        dd($makeDataJson);
+
+//        if(isset($_SESSION['PumpInfoForQuery'])) {
+//            // Retrieve the session data
+//            $makeDataJson = $_SESSION['PumpInfoForQuery'];
+//
+//            $makeDataObject = json_decode($makeDataJson, true);
+//            dd($makeDataObject);
+//        }
+
+        return Excel::download(new TestExportBySearch, 'testBySearch.xlsx');
+//        dd($tests);
+
+    }
+
+
+    public function downloadReport(){
+
     }
 
     public function render()

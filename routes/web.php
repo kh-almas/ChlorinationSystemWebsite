@@ -3,6 +3,7 @@
 use App\Http\Controllers\PumpController;
 use App\Livewire\Pamp\UpdatePamp;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+//Route::view('/', 'welcome');
+//Route::view('/', 'welcome');
+Volt::route('/', 'pages.auth.login');
 
-Route::view('report', 'report.testReport')
+//Route::view('report', 'report.testReport')
+//    ->middleware(['auth', 'verified'])
+//    ->name('report');
+
+Route::get('/report', [PumpController::class, 'report'])
     ->middleware(['auth', 'verified'])
     ->name('report');
 

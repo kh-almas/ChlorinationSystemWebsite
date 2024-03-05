@@ -6,7 +6,7 @@
                 <select wire:model="selectedZone" wire:change="applyFilter" id="zone" name="zone" autocomplete="zone" class="w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                     <option value="">Select a zone</option>
                     @foreach($this->allZone as $zone)
-                        <option value={{ $zone->zone }}>{{ $zone->zone }}</option>
+                        <option value={{ $zone->zone }} {{ $zone->zone == $selectedZone ? 'selected' : '' }} >{{ $zone->zone }}</option>
                     @endforeach
                 </select>
             </div>
@@ -45,8 +45,8 @@
             </div>
         </div>
 
-        <div>
-            <x-primary-button wire:click="downloadTestData">{{ __('Export Test Data') }}</x-primary-button>
+        <div style="padding-bottom: 4px;">
+            <x-primary-button wire:click="testReport">{{ __('Export Test Data') }}</x-primary-button>
         </div>
     </div>
 
@@ -137,13 +137,19 @@
                                             <x-dropdown-link :href="route('testUpdate', ['pump' => $test->pump_id, 'test' => $test->id,])" wire:navigate>
                                                 {{ __('Edit') }}
                                             </x-dropdown-link>
-                                            {{--                                            <x-dropdown-link :href="route('report', ['pump' => $this->pumpId, 'test' => $test->id])" wire:navigate="route('report', ['pump' => $this->pumpId, 'test' => $test->id])" target="_blank">--}}
-                                            {{--                                                {{ __('Report') }}--}}
-                                            {{--                                            </x-dropdown-link>--}}
+{{--                                            <x-dropdown-link :href="route('report', ['pump' => $this->pumpId, 'test' => $test->id])" wire:navigate="route('report', ['pump' => $this->pumpId, 'test' => $test->id])" target="_blank">--}}
+{{--                                                {{ __('Report') }}--}}
+{{--                                            </x-dropdown-link>--}}
 
-                                            <a href="{{ route('report') }}" target="_blank" class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out">
+                                            <a href="{{ route('report', ['test' => $test->id]) }}" target="_blank" class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out">
                                                 {{ __('Report') }}
                                             </a>
+
+{{--                                            <button wire:click="testReport"--}}
+{{--                                                    class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out"--}}
+{{--                                            >--}}
+{{--                                                {{ __('Report') }}--}}
+{{--                                            </button>--}}
 
                                             <button wire:click="deletePump({{ $test->id }})"
                                                     onclick="confirm('Are you sure you want to delete this pump?') || event.stopImmediatePropagation()"
