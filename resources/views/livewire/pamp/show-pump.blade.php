@@ -50,7 +50,7 @@
     </div>
 
     <div class="mt-6">
-        <div class=" mx-auto rounded-md sm:p-4 dark:text-gray-100 dark:bg-gray-900">
+        <div class="mx-auto rounded-md sm:p-4 dark:text-gray-100 dark:bg-gray-900">
             <div class="p-4">
                 <div class="flex justify-between items-center">
                     <h2 class="mb-3 text-2xl font-semibold leadi">All pump</h2>
@@ -65,7 +65,7 @@
                 {{ __('deleted.') }}
             </x-action-message>
 
-            <div class="mb-4">
+            <div class="mb-4" style="overflow-x: scroll;">
                 <table class="text-xs">
                     <thead class="rounded-t-lg dark:bg-gray-700" style="height: 50px">
                         <tr style="height: 48px">
@@ -132,27 +132,57 @@
                                 <span>{{$pump->pump_running_condition}}</span>
                             </td>
                             <td class="px-3 py-2" style="max-width: 80px !important;">
-                                <div>
-                                    <x-dropdown align="right" class="w-20" style="z-index: 300; overflow: visible;">
-                                        <x-slot name="trigger">
-                                            <button class="inline-flex items-center px-2 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                                                Action
-                                            </button>
-                                        </x-slot>
+{{--                                <div>--}}
+{{--                                    <x-dropdown align="right" class="w-20" style="z-index: 300; overflow: visible;">--}}
+{{--                                        <x-slot name="trigger">--}}
+{{--                                            <button class="inline-flex items-center px-2 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">--}}
+{{--                                                Action--}}
+{{--                                            </button>--}}
+{{--                                        </x-slot>--}}
 
-                                        <x-slot name="content">
+{{--                                        <x-slot name="content">--}}
+{{--                                            <x-dropdown-link :href="route('test', ['pump' => $pump->id])" wire:navigate>--}}
+{{--                                                {{ __('Test History') }}--}}
+{{--                                            </x-dropdown-link>--}}
+
+{{--                                            <x-dropdown-link :href="route('addTestHistory', ['pump' => $pump->id])" wire:navigate>--}}
+{{--                                                {{ __('Add Test History') }}--}}
+{{--                                            </x-dropdown-link>--}}
+
+{{--                                            <x-dropdown-link :href="route('updatePump', ['pump' => $pump->id])" wire:navigate>--}}
+{{--                                                {{ __('Edit') }}--}}
+{{--                                            </x-dropdown-link>--}}
+
+{{--                                            <button--}}
+{{--                                                wire:click="deletePump({{ $pump->id }})"--}}
+{{--                                                onclick="confirm('Are you sure you want to delete this pump?') || event.stopImmediatePropagation()"--}}
+{{--                                                class="block w-full px-4 py-2 text-start text-sm leading-5 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-800 transition duration-150 ease-in-out"--}}
+{{--                                            >--}}
+{{--                                                {{ __('Delete') }}--}}
+{{--                                            </button>--}}
+{{--                                        </x-slot>--}}
+{{--                                    </x-dropdown>--}}
+{{--                                </div>--}}
+
+                                <div x-data="{ isOpen: false }">
+                                    <button @click="isOpen = !isOpen" class="inline-flex items-center px-2 py-1 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                        Action
+                                    </button>
+
+                                    <div x-show="isOpen" @click.away="isOpen = false" class="absolute z-50 mt-2" style="width: 160px; right: 55px">
+                                        <div class="bg-gray-100 dark:bg-gray-700 shadow-lg rounded-md overflow-hidden">
                                             <x-dropdown-link :href="route('test', ['pump' => $pump->id])" wire:navigate>
                                                 {{ __('Test History') }}
                                             </x-dropdown-link>
-
+                                            <hr />
                                             <x-dropdown-link :href="route('addTestHistory', ['pump' => $pump->id])" wire:navigate>
                                                 {{ __('Add Test History') }}
                                             </x-dropdown-link>
-
+                                            <hr />
                                             <x-dropdown-link :href="route('updatePump', ['pump' => $pump->id])" wire:navigate>
                                                 {{ __('Edit') }}
                                             </x-dropdown-link>
-
+                                            <hr />
                                             <button
                                                 wire:click="deletePump({{ $pump->id }})"
                                                 onclick="confirm('Are you sure you want to delete this pump?') || event.stopImmediatePropagation()"
@@ -160,8 +190,8 @@
                                             >
                                                 {{ __('Delete') }}
                                             </button>
-                                        </x-slot>
-                                    </x-dropdown>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>

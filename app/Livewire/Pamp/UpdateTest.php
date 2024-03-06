@@ -43,6 +43,13 @@ class UpdateTest extends Component
         $this->phone = $testInfo->phone;
     }
 
+    public function calculateCombinedResidualChlorine()
+    {
+        if ($this->free_residual_chlorine && $this->total_residual_chlorine) {
+            $this->combined_residual_chlorine = $this->total_residual_chlorine - $this->free_residual_chlorine;
+        }
+    }
+
     public function updateForm()
     {
 //        $this->validate([

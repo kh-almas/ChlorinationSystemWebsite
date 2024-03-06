@@ -33,7 +33,6 @@ class Settings extends Component
             $this->address = $settings->address;
             $this->old_photo = $settings->photo;
         }
-//        dd($settings->photo);
     }
 
     public function updateForm()

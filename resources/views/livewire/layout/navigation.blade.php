@@ -23,7 +23,7 @@ new class extends Component
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" wire:navigate>
+                    <a href="{{ route('pump') }}" wire:navigate>
 {{--                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />--}}
                         <img style="width: 30px; height: 30px; border-radius: 8px;" src="{{ asset('storage/uploads/dwasa.png') }}" alt="img">
                     </a>
@@ -142,20 +142,20 @@ new class extends Component
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+{{--            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>--}}
+{{--                {{ __('Dashboard') }}--}}
+{{--            </x-responsive-nav-link>--}}
 
             <x-responsive-nav-link :href="route('pump')" :active="request()->routeIs('pump')" wire:navigate>
                 {{ __('Pump profile') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('test')" :active="request()->routeIs('test')" wire:navigate>
+            <x-responsive-nav-link :href="route('allTest')" :active="request()->routeIs('allTest')" wire:navigate>
                 {{ __('Test history') }}
             </x-responsive-nav-link>
 
-            <x-responsive-nav-link :href="route('test')" :active="request()->routeIs('test')" wire:navigate>
-                {{ __('Test history') }}
+            <x-responsive-nav-link :href="route('newUser')" :active="request()->routeIs('newUser')" wire:navigate>
+                {{ __('New User') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('user')" :active="request()->routeIs('user')" wire:navigate>

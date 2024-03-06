@@ -16,7 +16,6 @@ class PumpsImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new Pump([
-            'id' => $row['id'],
             'name' => $row['name'],
             'source_identification' => $row['source_identification'],
             'location_of_pump' => $row['location_of_pump'],
